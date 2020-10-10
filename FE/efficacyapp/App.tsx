@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler';
 import React from 'react';
+import {Provider as PaperProvider} from 'react-native-paper';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/lib/integration/react';
 import {store, persistor} from 'storage/store';
@@ -10,7 +11,9 @@ function App() {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <Routes />
+        <PaperProvider>
+          <Routes />
+        </PaperProvider>
       </PersistGate>
     </Provider>
   );

@@ -4,22 +4,22 @@ import {Button} from 'react-native-paper';
 import {useDispatch} from 'react-redux';
 import {actionIsLogin} from 'storage/user/action';
 
-function Home() {
+function Login() {
   const dispatch = useDispatch();
-  const onLogout = () => {
-    dispatch(actionIsLogin(false));
+  const onLogin = () => {
+    dispatch(actionIsLogin(true));
   };
   return (
     <View style={styles.container}>
-      <Text>Home Screen</Text>
-      <Button mode="contained" onPress={onLogout}>
-        Log Out
+      <Text>Login Screen</Text>
+      <Button mode="contained" onPress={onLogin}>
+        Login
       </Button>
     </View>
   );
 }
 
-export default Home;
+export default Login;
 
 const styles = StyleSheet.create({
   container: {
