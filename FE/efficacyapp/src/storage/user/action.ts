@@ -5,3 +5,7 @@ export const actionIsLogin = (data?: any, message?: string): Action => ({
   data,
   message,
 });
+
+export const actionIsLogout = (): Action => ({
+  type: TypeRedux.IS_LOGOUT,
+});

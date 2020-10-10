@@ -1,13 +1,13 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {Button} from 'react-native-paper';
+import {View, StyleSheet} from 'react-native';
+import {Button, Text} from 'react-native-paper';
 import {useDispatch} from 'react-redux';
-import {actionIsLogin} from 'storage/user/action';
+import {actionIsLogout} from 'storage/user/action';
 
 function Home() {
   const dispatch = useDispatch();
   const onLogout = () => {
-    dispatch(actionIsLogin(false));
+    dispatch(actionIsLogout());
   };
   return (
     <View style={styles.container}>

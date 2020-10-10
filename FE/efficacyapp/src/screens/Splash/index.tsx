@@ -1,43 +1,32 @@
 import React from 'react';
-import {View, Text, StyleSheet, Button, Alert, TextInput} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {useForm, Controller} from 'react-hook-form';
+import {Button} from 'react-native-paper';
 
 function Splash() {
   // Props
   const navigation = useNavigation();
-  const {control, handleSubmit, errors} = useForm();
+
+  // State
+  const [] = React.useState();
 
   // Function
   const onGoLogin = () => {
     navigation.navigate('LoginScreen');
   };
 
-  const onSubmit = (data: any) => {
-    Alert.alert('alert', JSON.stringify(data));
-    setTimeout(() => {
-      onGoLogin();
-    }, 500);
+  const onGoRegister = () => {
+    navigation.navigate('RegisterScreen');
   };
 
   return (
     <View style={styles.container}>
-      <Text>Splash Screen</Text>
-      <Controller
-        control={control}
-        name="email"
-        rules={{required: true}}
-        defaultValue=""
-        render={({onChange, onBlur, value}) => (
-          <TextInput
-            onBlur={onBlur}
-            onChangeText={(value) => onChange(value)}
-            value={value}
-          />
-        )}
-      />
-      {errors.email && <Text>Error coek</Text>}
-      <Button onPress={handleSubmit(onSubmit)} title="HOME" />
+      <Button onPress={onGoLogin} mode="contained" style={styles.fullWidth}>
+        Login
+      </Button>
+      <Button onPress={onGoRegister} mode="outlined" style={styles.fullWidth}>
+        Register
+      </Button>
     </View>
   );
 }
@@ -47,5 +36,11 @@ export default Splash;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  fullWidth: {
+    width: '95%',
+    marginBottom: 10,
   },
 });

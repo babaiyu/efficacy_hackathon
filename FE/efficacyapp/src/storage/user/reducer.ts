@@ -2,6 +2,7 @@ import {TypeRedux, Action, UserState as State} from '../types';
 
 const initialState: State = {
   isLogin: false,
+  dataUser: {},
 };
 
 const userReducer = (state: State = initialState, action: Action): State => {
@@ -9,7 +10,15 @@ const userReducer = (state: State = initialState, action: Action): State => {
     case TypeRedux.IS_LOGIN:
       return {
         ...state,
-        isLogin: action.data,
+        isLogin: true,
+        dataUser: action.data,
+      };
+
+    case TypeRedux.IS_LOGOUT:
+      return {
+        ...state,
+        isLogin: false,
+        dataUser: {},
       };
 
     default:
