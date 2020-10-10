@@ -1,0 +1,23 @@
+{
+	"name": "efficacyapi",
+	"version": "1.0.0",
+	"description": "REST API of a Live Concert Streaming App by Efficacy which is made for BNCC Hackathon Event",
+	"main": "index.js",
+	"scripts": {
+		"start": "node src/index",
+		"dev": "nodemon src/index"
+	},
+	"author": "M. Noor Ravi Deevan",
+	"license": "MIT",
+	"dependencies": {
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"helmet": "^4.1.1",
+		"knex": "^0.21.6",
+		"morgan": "^1.10.0",
+		"pg": "^8.4.1"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.4"
+	}
+}
