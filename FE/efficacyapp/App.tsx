@@ -1,18 +1,9 @@
+import 'react-native-gesture-handler';
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import Routes from 'config/routes';
 
 function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Welcome</Text>
-    </View>
-  );
+  return <Routes />;
 }
 
 export default App;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
