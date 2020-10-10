@@ -1,6 +1,18 @@
 import SplashScreen from './Splash';
-import HomeScreen from './Home';
 import LoginScreen from './Login';
 import RegisterScreen from './Register';
 
-export {SplashScreen, HomeScreen, LoginScreen, RegisterScreen};
+import HomeScreen from './Home';
+import OrderScreen from './Orders';
+import ProfileScreen from './Profile';
+import ShopScreen from './Shop';
+
+export {
+  SplashScreen,
+  HomeScreen,
+  LoginScreen,
+  RegisterScreen,
+  OrderScreen,
+  ProfileScreen,
+  ShopScreen,
+};

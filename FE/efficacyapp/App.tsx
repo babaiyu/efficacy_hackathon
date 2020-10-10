@@ -6,12 +6,22 @@ import {PersistGate} from 'redux-persist/lib/integration/react';
 import {store, persistor} from 'storage/store';
 
 import Routes from 'config/routes';
+import {myColors} from 'constants/colors';
 
 function App() {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <PaperProvider theme={DarkTheme}>
+        <PaperProvider
+          theme={{
+            ...DarkTheme,
+            colors: {
+              ...DarkTheme.colors,
+              primary: myColors.blue,
+              accent: myColors.deepBlue,
+              error: myColors.red,
+            },
+          }}>
           <Routes />
         </PaperProvider>
       </PersistGate>

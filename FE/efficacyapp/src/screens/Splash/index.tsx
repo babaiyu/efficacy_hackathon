@@ -2,6 +2,8 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Button} from 'react-native-paper';
+import {apiTest} from 'api';
+import {myColors} from 'constants/colors';
 
 function Splash() {
   // Props
@@ -19,12 +21,27 @@ function Splash() {
     navigation.navigate('RegisterScreen');
   };
 
+  const test = () => {
+    apiTest()
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
+  // Life Cycle
+  React.useEffect(() => {
+    test();
+  });
+
   return (
     <View style={styles.container}>
       <Button onPress={onGoLogin} mode="contained" style={styles.fullWidth}>
         Login
       </Button>
-      <Button onPress={onGoRegister} mode="outlined" style={styles.fullWidth}>
+      <Button
+        onPress={onGoRegister}
+        color={myColors.white}
+        mode="outlined"
+        style={styles.fullWidth}>
         Register
       </Button>
     </View>

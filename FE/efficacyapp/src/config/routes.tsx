@@ -1,31 +1,57 @@
 import React from 'react';
 import {NavigationContainer, DarkTheme} from '@react-navigation/native';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useSelector} from 'react-redux';
 
-import {HomeScreen, SplashScreen, LoginScreen, RegisterScreen} from 'screens';
+import {
+  HomeScreen,
+  SplashScreen,
+  LoginScreen,
+  RegisterScreen,
+  OrderScreen,
+  ProfileScreen,
+  ShopScreen,
+} from 'screens';
 import {AppState} from 'storage/reducers';
+import {myColors} from 'constants/colors';
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+function DashBoard() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="HomeScreen" component={HomeScreen} />
+      <Tab.Screen name="OrderScreen" component={OrderScreen} />
+      <Tab.Screen name="ShopScreen" component={ShopScreen} />
+      <Tab.Screen name="ProfileScreen" component={ProfileScreen} />
+    </Tab.Navigator>
+  );
+}
 
 function Routes() {
   const userState = useSelector((state: AppState) => state.user);
 
   return (
-    <NavigationContainer theme={DarkTheme}>
+    <NavigationContainer
+      theme={{
+        ...DarkTheme,
+        colors: {
+          ...DarkTheme.colors,
+          background: myColors.darkBlue,
+          primary: myColors.blue,
+        },
+      }}>
       <Stack.Navigator
         screenOptions={() => ({
           gestureEnabled: true,
           ...TransitionPresets.SlideFromRightIOS,
         })}>
         {userState.isLogin ? (
-          <Stack.Screen
-            name="HomeScreen"
-            component={HomeScreen}
-            options={{
-              headerShown: true,
-            }}
-          />
+          <>
+            <Stack.Screen name="Dashboard" component={DashBoard} />
+          </>
         ) : (
           <>
             <Stack.Screen
