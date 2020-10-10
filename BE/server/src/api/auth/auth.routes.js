@@ -110,19 +110,24 @@ router.post('/signup', async (req, res, next) => {
 });
 
 router.post('/signin', async (req, res, next) => {
-	const { email, password } = req.body;
+	const { identifier, password } = req.body;
 	try {
 		await schema.validate(
 			{
 				name: 'DocD',
-				email,
+				username: 'Hello',
+				email: 'test123@test.test',
 				password,
+				role_id: 2,
 			},
 			{
 				abortEarly: false,
 			}
 		);
-		const user = await User.query().where({ email }).first();
+		const user = await User.query()
+			.where({ email: identifier })
+			.orWhere({ username: identifier })
+			.first();
 		if (!user) {
 			const error = new Error('Invalid login');
 			res.status(403);
@@ -137,7 +142,8 @@ router.post('/signin', async (req, res, next) => {
 		const payload = {
 			id: user.id,
 			name: user.name,
-			email,
+			email: user.email,
+			role_id: user.role_id,
 		};
 		const token = await jwt.sign(payload);
 		res.json({
