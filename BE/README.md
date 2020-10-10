@@ -10,3 +10,18 @@ the database can be used using docker-compose
 * run `docker-compose up` to turn on the database
 * use Ctrl+C to stop the database
 * run `docker-compose down` to turn off the database
+
+## Migrate database
+
+Migrating the database or you can say making the tables and columns for the database
+
+just run `npm run migrate` in the server folder
+
+## Run the server
+
+running the server can be done in 2 modes:
+Development:
+`npm run dev`
+
+Production:
+`npm start`
