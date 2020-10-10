@@ -5,7 +5,9 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "node src/index",
-		"dev": "nodemon src/index"
+		"dev": "nodemon src/index",
+		"migrate": "knex migrate:latest",
+		"rollback": "knex migrate:rollback"
 	},
 	"author": "M. Noor Ravi Deevan",
 	"license": "MIT",
