@@ -4,4 +4,5 @@ module.exports = {
 	registered_user: 'registered_user',
 	statistic: 'statistic',
 	transaction: 'transaction',
+	feedback: 'feedback',
 };
