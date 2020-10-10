@@ -22,10 +22,26 @@ const Tab = createBottomTabNavigator();
 function DashBoard() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="HomeScreen" component={HomeScreen} />
-      <Tab.Screen name="OrderScreen" component={OrderScreen} />
-      <Tab.Screen name="ShopScreen" component={ShopScreen} />
-      <Tab.Screen name="ProfileScreen" component={ProfileScreen} />
+      <Tab.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{title: 'Home'}}
+      />
+      <Tab.Screen
+        name="OrderScreen"
+        component={OrderScreen}
+        options={{title: 'Orders'}}
+      />
+      <Tab.Screen
+        name="ShopScreen"
+        component={ShopScreen}
+        options={{title: 'Shop'}}
+      />
+      <Tab.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={{title: 'Profile'}}
+      />
     </Tab.Navigator>
   );
 }
@@ -44,10 +60,7 @@ function Routes() {
         },
       }}>
       <Stack.Navigator
-        screenOptions={() => ({
-          gestureEnabled: true,
-          ...TransitionPresets.SlideFromRightIOS,
-        })}>
+        screenOptions={() => ({...TransitionPresets.SlideFromRightIOS})}>
         {userState.isLogin ? (
           <>
             <Stack.Screen name="Dashboard" component={DashBoard} />
