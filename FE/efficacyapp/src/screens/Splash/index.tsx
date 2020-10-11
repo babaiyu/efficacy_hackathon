@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Button, Text} from 'react-native-paper';
 import {apiTest} from 'api';
@@ -35,7 +35,11 @@ function Splash() {
   return (
     <View style={styles.container}>
       <View>
-        <Text>LOGO</Text>
+        <Image
+          source={require('assets/image/logo_pink.png')}
+          style={styles.logo}
+          resizeMode="contain"
+        />
       </View>
       <View style={styles.content}>
         <Button
@@ -65,6 +69,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
+  },
+  logo: {
+    width: 300,
+    height: 150,
   },
   content: {
     width: '100%',

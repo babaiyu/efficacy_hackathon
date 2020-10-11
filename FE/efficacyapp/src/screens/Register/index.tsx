@@ -15,7 +15,7 @@ function Register() {
         if (!res.success) {
           Alert.alert('Alert', res.message);
         } else {
-          Alert.alert('Alert', 'Success Login');
+          onLogin();
         }
       })
       .catch((err) => {

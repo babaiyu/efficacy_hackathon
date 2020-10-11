@@ -5,6 +5,7 @@ import {
   KeyboardAvoidingView,
   TextInput,
   ScrollView,
+  Image,
 } from 'react-native';
 import {Text, Divider, Button, Title} from 'react-native-paper';
 import {useForm, Controller} from 'react-hook-form';
@@ -66,7 +67,11 @@ function RegisterForm(props: Props) {
     <ScrollView style={{backgroundColor: myColors.backgroundWhite}}>
       <KeyboardAvoidingView style={styles.container}>
         <View>
-          <Text style={styles.textDark}>LOGO</Text>
+          <Image
+            source={require('assets/image/logo_pink.png')}
+            style={styles.logo}
+            resizeMode="contain"
+          />
         </View>
         <View style={styles.content}>
           <Title style={styles.textDark}>Who are you?</Title>
@@ -204,7 +209,10 @@ function RegisterForm(props: Props) {
           <Controller
             control={control}
             name="confirmPassword"
-            rules={{required: true, validate: (value) => value === getValues('password')}}
+            rules={{
+              required: true,
+              validate: (value) => value === getValues('password'),
+            }}
             defaultValue=""
             render={({onChange, onBlur, value}) => (
               <TextInputPassword
@@ -262,6 +270,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  logo: {
+    width: 200,
+    height: 100,
   },
   textDark: {
     color: myColors.dark,

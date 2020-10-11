@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, TextInput} from 'react-native';
+import {StyleSheet, View, TextInput, Image} from 'react-native';
 import {Button, Divider, IconButton, Text} from 'react-native-paper';
 import {useForm, Controller} from 'react-hook-form';
 import {myColors} from 'constants/colors';
@@ -10,6 +10,7 @@ type Props = {
   sendData: (data: any) => void;
   onRegister: () => void;
   isError: boolean;
+  isLoading: boolean;
 };
 function LoginForm(props: Props) {
   // Props
@@ -27,7 +28,11 @@ function LoginForm(props: Props) {
   return (
     <View style={styles.container}>
       <View>
-        <Text style={{color: myColors.dark}}>Logo</Text>
+        <Image
+          source={require('assets/image/logo_pink.png')}
+          style={styles.logo}
+          resizeMode="contain"
+        />
       </View>
       <View style={styles.content}>
         <Controller
@@ -67,6 +72,7 @@ function LoginForm(props: Props) {
           style={styles.button}
           color={myColors.red}
           mode="contained"
+          loading={props.isLoading}
           onPress={handleSubmit(onLogin)}>
           Login
         </Button>
@@ -129,6 +135,10 @@ const styles = StyleSheet.create({
   content: {
     width: '70%',
     marginTop: 20,
+  },
+  logo: {
+    width: 200,
+    height: 100,
   },
   button: {
     width: '100%',
