@@ -104,14 +104,14 @@ function Routes() {
               component={ConcertScreen}
               options={{headerShown: false}}
             />
-          </>
-        ) : (
-          <>
             <Stack.Screen
               name="LiveStreamScreen"
               component={LiveStreamScreen}
               options={{headerShown: false}}
             />
+          </>
+        ) : (
+          <>
             <Stack.Screen
               name="SplashScreen"
               component={SplashScreen}
