@@ -56,3 +56,17 @@ export async function apiGetAllConcert(token: string) {
   });
   return handleResponse(res);
 }
+
+// CONCERT - POST
+export async function apiPostConcert(payload: any, token: string) {
+  const uri = `${URL}/concerts/`;
+  const res = await fetch(uri, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer: ${token}`,
+    },
+    body: JSON.stringify(payload),
+  });
+  return handleResponse(res);
+}

@@ -12,7 +12,7 @@ import {Text, Title, Caption} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
-function ContentCarousel() {
+function ContentCarousel({data}: any) {
   return (
     <Touch style={styles.card}>
       <View style={[styles.row, {justifyContent: 'flex-start'}]}>
@@ -24,12 +24,11 @@ function ContentCarousel() {
           uri:
             'https://blogmedia.evbstatic.com/wp-content/uploads/wpmulti/sites/8/2019/10/How-to-organise-music-concert.jpg',
         }}
-        style={{width: 150, height: 100, borderRadius: 10, alignSelf: 'center'}}
+        style={{width: '100%', height: 100, borderRadius: 10, alignSelf: 'center'}}
       />
-      <Title style={styles.textDark}>Title</Title>
+      <Title style={styles.textDark}>{data?.title}</Title>
       <Caption numberOfLines={3} style={styles.textDark}>
-        Apparently we had reached a great height in the atmosphere, for the sky
-        was a dead black, and the stars had ceased to twinkle.
+        {data?.description}
       </Caption>
       <View
         style={{
@@ -50,13 +49,16 @@ function ContentCarousel() {
   );
 }
 
-function CarouselHome() {
+type Props = {
+  dataConcert: Array<any>;
+};
+
+function CarouselHome({dataConcert = []}: Props) {
   // State
-  const [data, setData] = React.useState([1, 2, 3, 4, 5]);
   return (
     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-      {data.map((i) => (
-        <ContentCarousel key={i} />
+      {dataConcert.map((i) => (
+        <ContentCarousel data={i} key={i?.id} />
       ))}
     </ScrollView>
   );
