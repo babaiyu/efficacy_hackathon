@@ -23,6 +23,18 @@
 		},
 		"min_age": {
 			"type": "integer"
+		},
+		"registered": {
+			"type": "integer"
+		},
+		"watched": {
+			"type": "integer"
+		},
+		"stream_key": {
+			"type": "string"
+		},
+		"playback_id": {
+			"type": "string"
 		}
 	}
 }
