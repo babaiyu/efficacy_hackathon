@@ -18,7 +18,7 @@ type Props = {
 };
 function RegisterForm(props: Props) {
   // Props
-  const {control, handleSubmit, errors} = useForm();
+  const {control, handleSubmit, errors, getValues} = useForm();
 
   const [role, setRole] = React.useState(1);
   const [loading, setLoading] = React.useState(false);
@@ -39,11 +39,26 @@ function RegisterForm(props: Props) {
   };
 
   const onRegister = (data: any) => {
-    setLoading(true);
+    let payload = {
+      name: data.name,
+      username: data.username,
+      email: data.email,
+      password: data.password,
+      role_id: role,
+    };
+
+    const viewer = {
+      age: parseInt(data.age),
+    };
+    const organizer = {
+      organization: data.organization,
+    };
+
+    let result = Object.assign(payload, role === 1 ? viewer : organizer);
+
     setTimeout(() => {
-      props.sendData(data);
-      setLoading(false);
-    }, 3000);
+      props.sendData(result);
+    }, 100);
   };
 
   // Render
@@ -73,7 +88,7 @@ function RegisterForm(props: Props) {
           </View>
           <Controller
             control={control}
-            name="fullname"
+            name="name"
             rules={{required: true}}
             defaultValue=""
             render={({onChange, onBlur, value}) => (
@@ -82,7 +97,7 @@ function RegisterForm(props: Props) {
                 onBlur={onBlur}
                 value={value}
                 autoCapitalize="words"
-                style={[styles.formInput, errors.fullname && styles.formError]}
+                style={[styles.formInput, errors.name && styles.formError]}
                 placeholder="Full Name"
               />
             )}
@@ -119,7 +134,10 @@ function RegisterForm(props: Props) {
                   onBlur={onBlur}
                   value={value}
                   autoCapitalize="words"
-                  style={[styles.formInput, errors.organization && styles.formError]}
+                  style={[
+                    styles.formInput,
+                    errors.organization && styles.formError,
+                  ]}
                   placeholder="Organization Name"
                 />
               )}
@@ -186,7 +204,7 @@ function RegisterForm(props: Props) {
           <Controller
             control={control}
             name="confirmPassword"
-            rules={{required: true}}
+            rules={{required: true, validate: (value) => value === getValues('password')}}
             defaultValue=""
             render={({onChange, onBlur, value}) => (
               <TextInputPassword
@@ -194,7 +212,10 @@ function RegisterForm(props: Props) {
                 placeholder="Confirm Password"
                 onChangeText={(value) => onChange(value)}
                 onBlur={onBlur}
-                style={[styles.formInput, errors.confirmPassword && styles.formError]}
+                style={[
+                  styles.formInput,
+                  errors.confirmPassword && styles.formError,
+                ]}
               />
             )}
           />

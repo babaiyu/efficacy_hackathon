@@ -5,11 +5,11 @@ import {useForm, Controller} from 'react-hook-form';
 import {myColors} from 'constants/colors';
 import {fonts} from 'constants/fonts';
 import {TextInputPassword} from 'components';
-import {Icon} from 'react-native-paper/lib/typescript/src/components/Avatar/Avatar';
 
 type Props = {
   sendData: (data: any) => void;
   onRegister: () => void;
+  isError: boolean;
 };
 function LoginForm(props: Props) {
   // Props
@@ -32,7 +32,7 @@ function LoginForm(props: Props) {
       <View style={styles.content}>
         <Controller
           control={control}
-          name="email"
+          name="identifier"
           rules={{required: true}}
           defaultValue=""
           render={({onChange, onBlur, value}) => (
@@ -40,10 +40,9 @@ function LoginForm(props: Props) {
               onChangeText={(value) => onChange(value)}
               onBlur={onBlur}
               value={value}
-              keyboardType="email-address"
               autoCapitalize="none"
-              style={[styles.formInput, errors.email && styles.formError]}
-              placeholder="Email"
+              style={[styles.formInput, errors.identifier && styles.formError]}
+              placeholder="Username"
             />
           )}
         />
@@ -72,10 +71,12 @@ function LoginForm(props: Props) {
           Login
         </Button>
 
-        <View style={[styles.row, {justifyContent: 'flex-start'}]}>
-          <IconButton icon="alert-circle" color={myColors.red} size={20} />
-          <Text style={styles.textWhite}>Please check your credentials</Text>
-        </View>
+        {props.isError && (
+          <View style={[styles.row, {justifyContent: 'flex-start'}]}>
+            <IconButton icon="alert-circle" color={myColors.red} size={20} />
+            <Text style={styles.textWhite}>Please check your credentials</Text>
+          </View>
+        )}
       </View>
 
       <View>
