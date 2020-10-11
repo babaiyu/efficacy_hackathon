@@ -9,6 +9,7 @@ import ShopScreen from './Shop';
 
 import ConcertScreen from './Concert';
 import LiveStreamScreen from './LiveStream';
+import FeedbackScreen from './Feedback';
 
 export {
   SplashScreen,
@@ -20,4 +21,5 @@ export {
   ShopScreen,
   ConcertScreen,
   LiveStreamScreen,
+  FeedbackScreen,
 };
