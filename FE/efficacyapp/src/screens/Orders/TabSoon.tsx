@@ -1,14 +1,15 @@
 import {myColors} from 'constants/colors';
 import {fonts} from 'constants/fonts';
 import React from 'react';
-import {StyleSheet, View, FlatList} from 'react-native';
+import {View, FlatList, StyleSheet} from 'react-native';
 import {Button, Text} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 type Props = {
+  title: string;
   data: Array<any>;
 };
-function ListItem(props: Props) {
+function TabSoon(props: Props) {
   const renderItem = ({item, index}: any) => (
     <View key={index} style={[styles.row, {marginBottom: 10}]}>
       <View style={styles.card}>
@@ -40,12 +41,12 @@ function ListItem(props: Props) {
       data={props.data}
       renderItem={renderItem}
       keyExtractor={(_item, i) => i.toString()}
-      contentContainerStyle={{paddingBottom: 100}}
+      contentContainerStyle={{paddingBottom: 100, marginTop: 10}}
     />
   );
 }
 
-export default ListItem;
+export default TabSoon;
 
 const styles = StyleSheet.create({
   container: {
