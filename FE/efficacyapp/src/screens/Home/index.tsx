@@ -1,8 +1,12 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
-import {Button, Text} from 'react-native-paper';
+import {View, StyleSheet, ScrollView} from 'react-native';
+import {Title} from 'react-native-paper';
 import {useDispatch} from 'react-redux';
 import {actionIsLogout} from 'storage/user/action';
+import CardHome from './Card';
+import CarouselHome from './Carousel';
+import SearchHome from './Search';
+import PromoHome from './Promo';
 
 function Home() {
   const dispatch = useDispatch();
@@ -10,12 +14,21 @@ function Home() {
     dispatch(actionIsLogout());
   };
   return (
-    <View style={styles.container}>
-      <Text>Home Screen</Text>
-      <Button mode="contained" onPress={onLogout}>
-        Log Out
-      </Button>
-    </View>
+    <ScrollView style={{paddingBottom: 100}}>
+      <View style={styles.container}>
+        <SearchHome />
+        <CarouselHome />
+        <View style={styles.content}>
+          <Title>Whats happen?</Title>
+        </View>
+        <CardHome />
+
+        <View style={styles.content}>
+          <Title>Promo</Title>
+        </View>
+        <PromoHome />
+      </View>
+    </ScrollView>
   );
 }
 
@@ -24,5 +37,7 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
   },
+  content: {alignSelf: 'flex-start', marginHorizontal: 20, marginTop: 10},
 });
