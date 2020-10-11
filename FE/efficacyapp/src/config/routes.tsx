@@ -16,6 +16,7 @@ import {
   ConcertScreen,
   LiveStreamScreen,
   FeedbackScreen,
+  EndStream,
 } from 'screens';
 import {AppState} from 'storage/reducers';
 import {CustomTheme} from './combineTheme';
@@ -122,6 +123,11 @@ function Routes() {
             <Stack.Screen
               name="FeedbackScreen"
               component={FeedbackScreen}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="EndStream"
+              component={EndStream}
               options={{headerShown: false}}
             />
           </>
