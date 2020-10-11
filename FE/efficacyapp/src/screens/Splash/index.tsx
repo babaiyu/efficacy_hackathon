@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet, Image, ImageBackground} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Button, Text} from 'react-native-paper';
 import {apiTest} from 'api';
@@ -33,7 +33,10 @@ function Splash() {
   });
 
   return (
-    <View style={styles.container}>
+    <ImageBackground
+      source={require('assets/image/background_splash.png')}
+      resizeMode="cover"
+      style={styles.container}>
       <View>
         <Image
           source={require('assets/image/logo_pink.png')}
@@ -58,7 +61,7 @@ function Splash() {
           Create an Account
         </Button>
       </View>
-    </View>
+    </ImageBackground>
   );
 }
 

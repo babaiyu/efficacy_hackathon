@@ -7,6 +7,8 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 type Props = {
   onLogout: () => void;
   fullname: string;
+  age: string;
+  role: string;
 };
 
 function HeaderProfile(props: Props) {
@@ -31,10 +33,8 @@ function HeaderProfile(props: Props) {
             </View>
             <View style={{flex: 2}}>
               <Title style={styles.textDark}>{props.fullname}</Title>
-              <Caption style={styles.textDark}>
-                Anak baru kemarin sore, suka ngopi disenja hari didepan teras
-                rumah ditemani rintik air kedamaian (deskripsi){' '}
-              </Caption>
+              <Caption style={styles.textDark}>Age: {props.age} y.o</Caption>
+              <Caption style={styles.textDark}>{props.role}</Caption>
             </View>
           </View>
 

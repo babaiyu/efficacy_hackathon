@@ -1,8 +1,15 @@
 import React from 'react';
-import {View, StyleSheet, ScrollView, Alert} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Alert,
+  RefreshControl,
+  Image,
+  Text,
+} from 'react-native';
 import {Title} from 'react-native-paper';
-import {useDispatch, useSelector} from 'react-redux';
-import {actionIsLogout} from 'storage/user/action';
+import {useSelector} from 'react-redux';
 import CardHome from './Card';
 import CarouselHome from './Carousel';
 import SearchHome from './Search';
@@ -12,45 +19,55 @@ import {apiGetAllConcert} from 'api';
 
 function Home() {
   // Props
-  const dispatch = useDispatch();
   const userRedux = useSelector((state: AppState) => state.user);
   const [loading, setLoading] = React.useState(false);
 
+  // State
+  const [dataConcert, setDataConcert] = React.useState([]);
+
   // Function
   const getAllConcert = () => {
+    setLoading(true);
     const token = userRedux?.dataUser?.token;
-    Alert.alert('Alert', token);
     if (token !== undefined) {
       apiGetAllConcert(token)
         .then((res) => {
           if (!res.success) {
             Alert.alert('Alert', res?.message);
+            setLoading(false);
           } else {
-            Alert.alert('Alert', 'Success Get Data');
+            setDataConcert(res?.concerts);
+            setLoading(false);
           }
         })
-        .catch((err) => Alert.alert('Alert', err.message));
+        .catch((err) => {
+          Alert.alert('Alert', err.message);
+          setLoading(false);
+        });
     }
-  };
-  const onLogout = () => {
-    dispatch(actionIsLogout());
   };
 
   // Life Cycle
   React.useEffect(() => {
-    getAllConcert();
+    if (dataConcert.length === 0) {
+      getAllConcert();
+    }
   });
 
   // Render
   return (
-    <ScrollView style={{paddingBottom: 100}}>
+    <ScrollView
+      style={{paddingBottom: 100}}
+      refreshControl={
+        <RefreshControl refreshing={loading} onRefresh={getAllConcert} />
+      }>
       <View style={styles.container}>
         <SearchHome />
         <CarouselHome />
         <View style={styles.content}>
           <Title>Whats happen?</Title>
         </View>
-        <CardHome />
+        <CardHome dataConcert={dataConcert} />
 
         <View style={styles.content}>
           <Title>Promo</Title>
