@@ -1,0 +1,22 @@
+{
+	"type": "object",
+	"required": ["user_id", "concert_id", "score"],
+	"additionalProperties": false,
+	"properties": {
+		"id": {
+			"type": "integer"
+		},
+		"user_id": {
+			"type": "integer"
+		},
+		"concert_id": {
+			"type": "integer"
+		},
+		"score": {
+			"type": "integer"
+		},
+		"comment": {
+			"type": "text"
+		}
+	}
+}

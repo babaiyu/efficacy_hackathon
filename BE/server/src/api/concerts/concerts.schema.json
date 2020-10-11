@@ -1,0 +1,28 @@
+{
+	"type": "object",
+	"required": ["eo_id", "title", "description", "price"],
+	"additionalProperties": false,
+	"properties": {
+		"id": {
+			"type": "integer"
+		},
+		"eo_id": {
+			"type": "integer"
+		},
+		"title": {
+			"type": "string"
+		},
+		"description": {
+			"type": "text"
+		},
+		"date": {
+			"type": "datetime"
+		},
+		"price": {
+			"type": "integer"
+		},
+		"min_age": {
+			"type": "integer"
+		}
+	}
+}

@@ -34,20 +34,14 @@ exports.up = async (knex) => {
 			.integer(`eo_id`)
 			.unsigned()
 			.references('id')
-			.inTable('concert')
+			.inTable('user')
 			.onDelete('cascade')
 			.notNullable();
 		table.string('title').notNullable();
 		table.text('description').notNullable();
 		table.dateTime('date').notNullable();
 		table.integer('price').notNullable();
-		table.integer('min_age');
-		table.timestamps(false, true);
-	});
-
-	await knex.schema.createTable(tableNames.statistic, (table) => {
-		table.increments().notNullable();
-		references(table, 'concert');
+		table.integer('min_age').notNullable().defaultTo(0);
 		table.integer('registered').notNullable().defaultTo(0);
 		table.integer('watched').notNullable().defaultTo(0);
 		table.timestamps(false, true);
@@ -86,7 +80,6 @@ exports.down = async (knex) => {
 		[
 			tableNames.feedback,
 			tableNames.transaction,
-			tableNames.statistic,
 			tableNames.registered_user,
 			tableNames.concert,
 			tableNames.user,
