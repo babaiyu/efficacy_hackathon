@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavigationContainer, DarkTheme} from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useSelector} from 'react-redux';
@@ -14,7 +14,7 @@ import {
   ShopScreen,
 } from 'screens';
 import {AppState} from 'storage/reducers';
-import {myColors} from 'constants/colors';
+import {CustomTheme} from './combineTheme';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -50,15 +50,7 @@ function Routes() {
   const userState = useSelector((state: AppState) => state.user);
 
   return (
-    <NavigationContainer
-      theme={{
-        ...DarkTheme,
-        colors: {
-          ...DarkTheme.colors,
-          background: myColors.darkBlue,
-          primary: myColors.blue,
-        },
-      }}>
+    <NavigationContainer theme={CustomTheme}>
       <Stack.Navigator
         screenOptions={() => ({...TransitionPresets.SlideFromRightIOS})}>
         {userState.isLogin ? (
