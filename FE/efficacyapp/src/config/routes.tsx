@@ -100,11 +100,6 @@ function Routes() {
               options={{headerShown: false}}
             />
             <Stack.Screen
-              name="LiveStreamScreen"
-              component={LiveStreamScreen}
-              options={{headerShown: false}}
-            />
-            <Stack.Screen
               name="ConcertScreen"
               component={ConcertScreen}
               options={{headerShown: false}}
@@ -112,6 +107,11 @@ function Routes() {
           </>
         ) : (
           <>
+            <Stack.Screen
+              name="LiveStreamScreen"
+              component={LiveStreamScreen}
+              options={{headerShown: false}}
+            />
             <Stack.Screen
               name="SplashScreen"
               component={SplashScreen}

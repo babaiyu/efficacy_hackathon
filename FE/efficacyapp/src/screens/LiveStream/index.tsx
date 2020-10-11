@@ -187,7 +187,7 @@ function LiveStream() {
         </View>
       </View>
       <Video
-        source={require('assets/video/livestream.mp4')}
+        source={require('assets/video/konser.m4v')}
         onError={(err) => Alert.alert('Alert', err.error.errorString)}
         style={styles.backgroundVideo}
         resizeMode="cover"
