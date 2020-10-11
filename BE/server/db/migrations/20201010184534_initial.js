@@ -44,6 +44,8 @@ exports.up = async (knex) => {
 		table.integer('min_age').notNullable().defaultTo(0);
 		table.integer('registered').notNullable().defaultTo(0);
 		table.integer('watched').notNullable().defaultTo(0);
+		table.string('stream_key');
+		table.string('playback_id');
 		table.timestamps(false, true);
 	});
 
