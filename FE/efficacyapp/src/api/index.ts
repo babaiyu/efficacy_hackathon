@@ -1,21 +1,9 @@
-import axios from 'axios';
-
 const URL = 'http://192.168.1.9:3000/api';
 
 async function handleResponse(response: Response) {
   const text = await response.text();
   const data = text && JSON.parse(text);
   return data;
-}
-
-// TEST
-export async function apiTest() {
-  const uri = URL;
-  const res = await axios
-    .get(uri)
-    .then((res) => res)
-    .catch((err) => err);
-  return res;
 }
 
 // LOGIN
@@ -47,6 +35,19 @@ export async function apiRegister(payload: any) {
 // CONCERT - GET ALL
 export async function apiGetAllConcert(token: string) {
   const uri = `${URL}/concerts/`;
+  const res = await fetch(uri, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer: ${token}`,
+    },
+  });
+  return handleResponse(res);
+}
+
+// Concert - Get Concert By ID
+export async function apiGetConcertID(id: string, token: string) {
+  const uri = `${URL}/concerts/${id}`;
   const res = await fetch(uri, {
     method: 'GET',
     headers: {

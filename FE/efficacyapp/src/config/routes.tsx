@@ -13,6 +13,7 @@ import {
   OrderScreen,
   ProfileScreen,
   ShopScreen,
+  ConcertScreen,
 } from 'screens';
 import {AppState} from 'storage/reducers';
 import {CustomTheme} from './combineTheme';
@@ -83,6 +84,11 @@ function Routes() {
             <Stack.Screen
               name="Dashboard"
               component={DashBoard}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="ConcertScreen"
+              component={ConcertScreen}
               options={{headerShown: false}}
             />
           </>
