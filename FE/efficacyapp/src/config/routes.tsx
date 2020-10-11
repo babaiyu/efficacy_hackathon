@@ -14,6 +14,7 @@ import {
   ProfileScreen,
   ShopScreen,
   ConcertScreen,
+  LiveStreamScreen,
 } from 'screens';
 import {AppState} from 'storage/reducers';
 import {CustomTheme} from './combineTheme';
@@ -110,6 +111,11 @@ function Routes() {
             <Stack.Screen
               name="RegisterScreen"
               component={RegisterScreen}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="LiveStreamScreen"
+              component={LiveStreamScreen}
               options={{headerShown: false}}
             />
           </>

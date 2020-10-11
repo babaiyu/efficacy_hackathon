@@ -1,5 +1,5 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {apiGetConcertID} from 'api';
+import {apiOrderConcert, apiGetConcertID} from 'api';
 import {myColors} from 'constants/colors';
 import dayjs from 'dayjs';
 import React from 'react';
@@ -33,6 +33,7 @@ function Concert() {
 
   // State
   const [loading, setLoading] = React.useState(false);
+  const [loadingOrder, setLoadingOrder] = React.useState(false);
   const [data, setData] = React.useState(dummy);
 
   // Function
@@ -53,6 +54,30 @@ function Concert() {
       .catch((err) => {
         Alert.alert('Alert', 'Internal Server Error');
         setLoading(false);
+      });
+  };
+
+  const onOrder = () => {
+    setLoadingOrder(true);
+    const concert_id: any = route?.params;
+    const token = userRedux?.dataUser?.token;
+    const payload = {
+      user_id: userRedux?.dataUser?.data?.id,
+      concert_id: concert_id.id,
+    };
+    apiOrderConcert(payload, token)
+      .then((res) => {
+        if (!res.success) {
+          Alert.alert('Alert', res?.message);
+          setLoadingOrder(false);
+        } else {
+          Alert.alert('Alert', 'Success Order');
+          setLoadingOrder(false);
+        }
+      })
+      .catch((err) => {
+        Alert.alert('Alert', 'Internal Server Error');
+        setLoadingOrder(false);
       });
   };
 
@@ -99,8 +124,9 @@ function Concert() {
               mode="contained"
               color={myColors.red}
               style={styles.button}
+              loading={loadingOrder}
               disabled={data?.min_age > userRedux?.dataUser?.data?.age}
-              onPress={() => {}}>
+              onPress={onOrder}>
               ORDER
             </Button>
           </Card.Content>

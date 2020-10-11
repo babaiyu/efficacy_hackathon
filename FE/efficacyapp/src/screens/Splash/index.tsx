@@ -1,8 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, Image, ImageBackground} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {Button, Text} from 'react-native-paper';
-import {apiTest} from 'api';
+import {Button} from 'react-native-paper';
 import {myColors} from 'constants/colors';
 
 function Splash() {
@@ -20,17 +19,6 @@ function Splash() {
   const onGoRegister = () => {
     navigation.navigate('RegisterScreen');
   };
-
-  const test = () => {
-    apiTest()
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  };
-
-  // Life Cycle
-  React.useEffect(() => {
-    test();
-  });
 
   return (
     <ImageBackground

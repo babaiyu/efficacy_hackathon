@@ -71,3 +71,17 @@ export async function apiPostConcert(payload: any, token: string) {
   });
   return handleResponse(res);
 }
+
+// ORDER - User Ordering Ticket
+export async function apiOrderConcert(payload: any, token: string) {
+  const uri = `${URL}/registered/`;
+  const res = await fetch(uri, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer: ${token}`,
+    },
+    body: JSON.stringify(payload),
+  });
+  return handleResponse(res);
+}
