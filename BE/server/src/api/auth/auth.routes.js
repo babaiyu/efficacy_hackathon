@@ -95,7 +95,7 @@ router.post('/signup', async (req, res, next) => {
 		const payload = {
 			id: insertedUser.id,
 			name,
-			email,
+			age: age,
 			role_id,
 		};
 		const token = await jwt.sign(payload);
@@ -142,7 +142,7 @@ router.post('/signin', async (req, res, next) => {
 		const payload = {
 			id: user.id,
 			name: user.name,
-			email: user.email,
+			age: user.age,
 			role_id: user.role_id,
 		};
 		const token = await jwt.sign(payload);
