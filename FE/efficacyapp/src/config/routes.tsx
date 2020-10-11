@@ -69,6 +69,7 @@ function Routes() {
               component={LoginScreen}
               options={{
                 animationTypeForReplace: !userState.isLogin ? 'pop' : 'push',
+                headerShown: false,
               }}
             />
             <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
