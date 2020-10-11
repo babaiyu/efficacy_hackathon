@@ -1,8 +1,8 @@
 const router = require('express').Router();
+
 const Concert = require('./concerts.model');
 const Feedback = require('../feedbacks/feedbacks.model');
-
-// TODO: Check every route
+const Registered = require('../reg_users/registered.model');
 
 router.get('/', async (req, res, next) => {
 	try {
@@ -32,8 +32,30 @@ router.get('/', async (req, res, next) => {
 	}
 });
 
+router.get('/registered', async (req, res, next) => {
+	try {
+		const registeredConcert = await Registered.query()
+			.where({
+				user_id: req.userData.id,
+			})
+			.select('concert_id');
+		const concerts = await Concert.query().findByIds(
+			registeredConcert.map((concert) => concert.concert_id)
+		);
+		const currentDate = new Date();
+		const upcoming = concerts.filter((concert) => currentDate <= concert.date);
+		const passed = concerts.filter((concert) => currentDate > concert.date);
+		res.json({
+			upcoming,
+			passed,
+			success: true,
+		});
+	} catch (error) {
+		next(error);
+	}
+});
+
 router.get('/:id', async (req, res, next) => {
-	// TODO: Show statistics and feedbacks when opening  with an EO account
 	try {
 		const concert = await Concert.query().findById(req.params.id).first();
 		if (concert) {

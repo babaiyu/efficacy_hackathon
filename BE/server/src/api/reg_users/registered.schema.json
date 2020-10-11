@@ -11,9 +11,6 @@
 		},
 		"concert_id": {
 			"type": "integer"
-		},
-		"watched": {
-			"type": "boolean"
 		}
 	}
 }
