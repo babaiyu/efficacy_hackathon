@@ -35,7 +35,7 @@ function Login() {
       .catch((err) => {
         setIsError(true);
         setIsLoading(false);
-        Alert.alert('Alert', err);
+        Alert.alert('Alert', err.message);
       });
   };
 
