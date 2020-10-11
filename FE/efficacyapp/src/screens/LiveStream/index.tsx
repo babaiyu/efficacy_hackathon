@@ -66,7 +66,8 @@ function ListComment({data}: {data: Array<any>}) {
         data={data}
         renderItem={renderItem}
         keyExtractor={(_item, i) => i.toString()}
-        contentContainerStyle={{height: 200, justifyContent: 'flex-end'}}
+        contentContainerStyle={{justifyContent: 'flex-end'}}
+        showsVerticalScrollIndicator={false}
         style={{height: 200}}
       />
     </View>
@@ -189,7 +190,6 @@ function LiveStream() {
         source={require('assets/video/livestream.mp4')}
         onError={(err) => Alert.alert('Alert', err.error.errorString)}
         style={styles.backgroundVideo}
-        fullscreen={true}
         resizeMode="cover"
         playInBackground={true}
       />

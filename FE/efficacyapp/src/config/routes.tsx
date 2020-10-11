@@ -90,6 +90,21 @@ function Routes() {
               options={{headerShown: false}}
             />
             <Stack.Screen
+              name="EndStream"
+              component={EndStream}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="FeedbackScreen"
+              component={FeedbackScreen}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="LiveStreamScreen"
+              component={LiveStreamScreen}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
               name="ConcertScreen"
               component={ConcertScreen}
               options={{headerShown: false}}
@@ -113,21 +128,6 @@ function Routes() {
             <Stack.Screen
               name="RegisterScreen"
               component={RegisterScreen}
-              options={{headerShown: false}}
-            />
-            <Stack.Screen
-              name="LiveStreamScreen"
-              component={LiveStreamScreen}
-              options={{headerShown: false}}
-            />
-            <Stack.Screen
-              name="FeedbackScreen"
-              component={FeedbackScreen}
-              options={{headerShown: false}}
-            />
-            <Stack.Screen
-              name="EndStream"
-              component={EndStream}
               options={{headerShown: false}}
             />
           </>

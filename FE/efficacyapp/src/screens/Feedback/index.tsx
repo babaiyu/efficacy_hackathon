@@ -64,7 +64,7 @@ function Feedback() {
           color={myColors.red}
           mode="contained"
           onPress={handleSubmit(onSubmit)}>
-          Login
+          Submit
         </Button>
       </View>
     </View>
