@@ -22,7 +22,7 @@ exports.up = async (knex) => {
 		table.string('email').notNullable().unique();
 		table.string('password').notNullable();
 		table.string('organization');
-		table.integer('age');
+		table.integer('age').defaultTo(100000);
 		table.integer('point').defaultTo(0);
 		table.integer('role_id').notNullable();
 		table.timestamps(false, true);

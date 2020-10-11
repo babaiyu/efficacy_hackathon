@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const Concert = require('./concerts.model');
-const Feedback = requir('../feedbacks/feedbacks.model');
+const Feedback = require('../feedbacks/feedbacks.model');
 
 // TODO: Check every route
 
@@ -35,23 +35,34 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
 	// TODO: Show statistics and feedbacks when opening  with an EO account
 	try {
-		const concert = await Concert.query().findById(req.params.id);
-		if (req.userData.role_id === 1) {
-			delete concert.watched;
-			res.json({
-				concert,
-				success: true,
-			});
+		const concert = await Concert.query().findById(req.params.id).first();
+		if (concert) {
+			if (req.userData.role_id === 1) {
+				delete concert.watched;
+				res.json({
+					concert,
+					success: true,
+				});
+			} else {
+				const feedbacks = await Feedback.query().where(
+					'concert_id',
+					req.params.id
+				);
+				let average = 0;
+				if (feedbacks.length > 0) {
+					feedbacks.map((feedback) => (sum += feedback.score));
+					average /= feedbacks.length;
+				}
+				res.json({
+					concert,
+					feedbacks: feedbacks === null ? 0 : feedbacks,
+					average,
+					success: true,
+				});
+			}
 		} else {
-			const feedbacks = await Feedback.query().where(
-				'concert_id',
-				req.params.id
-			);
-			res.json({
-				concert,
-				feedbacks,
-				success: true,
-			});
+			const error = new Error('Concert doesnt exist');
+			throw error;
 		}
 	} catch (error) {
 		next(error);
@@ -80,7 +91,8 @@ router.put('/:id', async (req, res, next) => {
 		try {
 			const concert = await Concert.query()
 				.findById(req.params.id)
-				.update(req.body);
+				.update(req.body)
+				.returning('*');
 			res.json({
 				concert,
 				success: true,
