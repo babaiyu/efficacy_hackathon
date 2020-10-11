@@ -16,10 +16,12 @@ import SearchHome from './Search';
 import PromoHome from './Promo';
 import {AppState} from 'storage/reducers';
 import {apiGetAllConcert} from 'api';
+import {useNavigation} from '@react-navigation/native';
 
 function Home() {
   // Props
   const userRedux = useSelector((state: AppState) => state.user);
+  const navigation = useNavigation();
   const [loading, setLoading] = React.useState(false);
 
   // State
@@ -47,6 +49,10 @@ function Home() {
     }
   };
 
+  const onNavigateConcert = (data: any) => {
+    navigation.navigate('ConcertScreen', data);
+  };
+
   // Life Cycle
   React.useEffect(() => {
     if (dataConcert.length === 0) {
@@ -67,7 +73,10 @@ function Home() {
         <View style={styles.content}>
           <Title>Whats happen?</Title>
         </View>
-        <CardHome dataConcert={dataConcert} />
+        <CardHome
+          dataConcert={dataConcert}
+          onPress={(data) => onNavigateConcert(data)}
+        />
 
         <View style={styles.content}>
           <Title>Promo</Title>

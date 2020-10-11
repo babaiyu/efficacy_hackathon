@@ -12,9 +12,17 @@ import {Text, Title, Caption} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
-function ContentCarousel({data}: any) {
+type ContentProps = {
+  data: any;
+  onPress: (data: any) => void;
+};
+function ContentCarousel({data, onPress}: ContentProps) {
+  const onPressing = () => {
+    onPress(data);
+  };
+
   return (
-    <Touch style={styles.card}>
+    <Touch onPress={onPressing} style={styles.card}>
       <View style={[styles.row, {justifyContent: 'flex-start'}]}>
         <Icon name="circle" color={myColors.gray} />
         <Text style={styles.textDark}>Judul</Text>
@@ -24,7 +32,12 @@ function ContentCarousel({data}: any) {
           uri:
             'https://blogmedia.evbstatic.com/wp-content/uploads/wpmulti/sites/8/2019/10/How-to-organise-music-concert.jpg',
         }}
-        style={{width: '100%', height: 100, borderRadius: 10, alignSelf: 'center'}}
+        style={{
+          width: '100%',
+          height: 100,
+          borderRadius: 10,
+          alignSelf: 'center',
+        }}
       />
       <Title style={styles.textDark}>{data?.title}</Title>
       <Caption numberOfLines={3} style={styles.textDark}>
@@ -37,7 +50,7 @@ function ContentCarousel({data}: any) {
           justifyContent: 'flex-end',
         }}>
         <View style={[styles.row, {marginRight: 10}]}>
-          <Text style={[styles.textDark, styles.textThin]}>Free</Text>
+          <Text style={[styles.textDark, styles.textThin]}>{data.price}</Text>
           <FontAwesomeIcon name="ticket" size={20} />
         </View>
         <View style={styles.row}>
@@ -51,14 +64,19 @@ function ContentCarousel({data}: any) {
 
 type Props = {
   dataConcert: Array<any>;
+  onPress: (data: any) => void;
 };
 
-function CarouselHome({dataConcert = []}: Props) {
+function CarouselHome({dataConcert = [], onPress}: Props) {
   // State
   return (
     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
       {dataConcert.map((i) => (
-        <ContentCarousel data={i} key={i?.id} />
+        <ContentCarousel
+          data={i}
+          onPress={(data) => onPress(data)}
+          key={i?.id}
+        />
       ))}
     </ScrollView>
   );

@@ -7,6 +7,8 @@ import OrderScreen from './Orders';
 import ProfileScreen from './Profile';
 import ShopScreen from './Shop';
 
+import ConcertScreen from './Concert';
+
 export {
   SplashScreen,
   HomeScreen,
@@ -15,4 +17,5 @@ export {
   OrderScreen,
   ProfileScreen,
   ShopScreen,
+  ConcertScreen,
 };
