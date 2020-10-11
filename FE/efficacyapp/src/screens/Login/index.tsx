@@ -11,24 +11,30 @@ function Login() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [isError, setIsError] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   // Function
   const onLogin = (data: any) => {
+    setIsLoading(true);
     apiLogin(data)
       .then((res) => {
         if (!res.success) {
           setIsError(true);
+          setIsLoading(false);
         } else {
           const result = {
             data: res?.user,
             token: res?.token,
           };
-          Alert.alert('Alert', 'Success Login');
-          dispatch(actionIsLogin(result));
+          setIsLoading(false);
+          setTimeout(() => {
+            dispatch(actionIsLogin(result));
+          }, 100);
         }
       })
       .catch((err) => {
         setIsError(true);
+        setIsLoading(false);
         Alert.alert('Alert', err);
       });
   };
@@ -39,6 +45,7 @@ function Login() {
 
   return (
     <LoginForm
+      isLoading={isLoading}
       isError={isError}
       sendData={(data) => onLogin(data)}
       onRegister={onRegister}
