@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Registered = require('./registered.model');
 const User = require('../users/users.model');
+const Concert = require('../concerts/concerts.model');
 
 router.get('/:id', async (req, res, next) => {
 	try {
@@ -22,8 +23,12 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
 	try {
 		const registered = await Registered.query().insert(req.body);
+		const concert = await Concert.query()
+			.findById(req.body.concert_id)
+			.increment('registered', 1);
 		res.json({
 			registered,
+			concert,
 			success: true,
 		});
 	} catch (error) {

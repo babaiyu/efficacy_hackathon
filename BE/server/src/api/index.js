@@ -7,6 +7,7 @@ const auth = require('./auth/auth.routes');
 const concerts = require('./concerts/concerts.routes');
 const registered = require('./reg_users/registered.routes');
 const feedbacks = require('./feedbacks/feedbacks.routes');
+const transactions = require('./transactions/transactions.routes');
 
 router.get('/', (req, res) => {
 	res.json({
@@ -18,5 +19,6 @@ router.use(verifyToken);
 router.use('/concerts', concerts);
 router.use('/registered', registered);
 router.use('/feedbacks', feedbacks);
+router.use('/transactions', transactions);
 
 module.exports = router;

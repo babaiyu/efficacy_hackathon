@@ -69,8 +69,8 @@ exports.up = async (knex) => {
 		references(table, 'concert');
 		table.dateTime('date').notNullable().defaultTo(knex.fn.now(6));
 		table.integer('nominal').notNullable();
-		table.string('transaction_media').notNullable();
-		table.float('transaction_cut').notNullable();
+		table.string('transaction_media');
+		table.float('transaction_cut');
 		table.timestamps(false, true);
 	});
 };
