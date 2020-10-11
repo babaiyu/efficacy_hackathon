@@ -10,6 +10,7 @@ import {Text, Divider, Button, Title} from 'react-native-paper';
 import {useForm, Controller} from 'react-hook-form';
 import {myColors} from 'constants/colors';
 import {fonts} from 'constants/fonts';
+import {TextInputPassword} from 'components';
 
 type Props = {
   sendData: (data: any) => void;
@@ -56,12 +57,14 @@ function RegisterForm(props: Props) {
           <Title style={styles.textDark}>Who are you?</Title>
           <View style={styles.row}>
             <Button
+              uppercase={false}
               onPress={() => onSelectRole(1)}
               style={buttonIsActive(1)}
               color={colorButtonIsActive(1)}>
               Viewer
             </Button>
             <Button
+              uppercase={false}
               onPress={() => onSelectRole(2)}
               style={buttonIsActive(2)}
               color={colorButtonIsActive(2)}>
@@ -79,7 +82,7 @@ function RegisterForm(props: Props) {
                 onBlur={onBlur}
                 value={value}
                 autoCapitalize="words"
-                style={styles.formInput}
+                style={[styles.formInput, errors.fullname && styles.formError]}
                 placeholder="Full Name"
               />
             )}
@@ -97,7 +100,7 @@ function RegisterForm(props: Props) {
                 onBlur={onBlur}
                 value={value}
                 autoCapitalize="none"
-                style={styles.formInput}
+                style={[styles.formInput, errors.username && styles.formError]}
                 placeholder="Username"
               />
             )}
@@ -116,7 +119,7 @@ function RegisterForm(props: Props) {
                   onBlur={onBlur}
                   value={value}
                   autoCapitalize="words"
-                  style={styles.formInput}
+                  style={[styles.formInput, errors.organization && styles.formError]}
                   placeholder="Organization Name"
                 />
               )}
@@ -135,7 +138,7 @@ function RegisterForm(props: Props) {
                 onBlur={onBlur}
                 value={value}
                 autoCapitalize="none"
-                style={styles.formInput}
+                style={[styles.formInput, errors.email && styles.formError]}
                 keyboardType="email-address"
                 placeholder="Email"
               />
@@ -155,7 +158,7 @@ function RegisterForm(props: Props) {
                   onBlur={onBlur}
                   value={value}
                   keyboardType="number-pad"
-                  style={styles.formInput}
+                  style={[styles.formInput, errors.age && styles.formError]}
                   placeholder="Age"
                 />
               )}
@@ -169,14 +172,12 @@ function RegisterForm(props: Props) {
             rules={{required: true}}
             defaultValue=""
             render={({onChange, onBlur, value}) => (
-              <TextInput
+              <TextInputPassword
+                value={value}
+                placeholder="Password"
                 onChangeText={(value) => onChange(value)}
                 onBlur={onBlur}
-                value={value}
-                autoCapitalize="none"
-                style={styles.formInput}
-                placeholder="Password"
-                secureTextEntry={true}
+                style={[styles.formInput, errors.password && styles.formError]}
               />
             )}
           />
@@ -188,14 +189,12 @@ function RegisterForm(props: Props) {
             rules={{required: true}}
             defaultValue=""
             render={({onChange, onBlur, value}) => (
-              <TextInput
+              <TextInputPassword
+                value={value}
+                placeholder="Confirm Password"
                 onChangeText={(value) => onChange(value)}
                 onBlur={onBlur}
-                value={value}
-                autoCapitalize="none"
-                style={styles.formInput}
-                placeholder="Confirm Password"
-                secureTextEntry={true}
+                style={[styles.formInput, errors.confirmPassword && styles.formError]}
               />
             )}
           />
@@ -235,7 +234,7 @@ const styles = StyleSheet.create({
     backgroundColor: myColors.backgroundWhite,
   },
   content: {
-    width: '90%',
+    width: '70%',
     marginTop: 20,
   },
   row: {
@@ -250,12 +249,12 @@ const styles = StyleSheet.create({
   buttonRadiusActive: {
     backgroundColor: myColors.red,
     borderRadius: 20,
-    width: '45%',
+    width: '47.5%',
     marginBottom: 10,
   },
   buttonRadiusNonActive: {
     borderRadius: 20,
-    width: '45%',
+    width: '47.5%',
     marginBottom: 10,
   },
   buttonRegister: {
@@ -272,5 +271,11 @@ const styles = StyleSheet.create({
     fontFamily: fonts.medium,
     textAlign: 'center',
     marginVertical: 5,
+    borderWidth: 1,
+    borderColor: myColors.white,
+  },
+  formError: {
+    borderWidth: 1,
+    borderColor: myColors.red,
   },
 });
