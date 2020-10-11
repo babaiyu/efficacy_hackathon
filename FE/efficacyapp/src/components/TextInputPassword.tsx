@@ -1,3 +1,4 @@
+import { myColors } from 'constants/colors';
 import React from 'react';
 import {View, TextInput, StyleSheet} from 'react-native';
 import {IconButton} from 'react-native-paper';
@@ -45,7 +46,7 @@ function TextInputPassword(props: Props) {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <IconButton onPress={onShowPassword} icon={!show ? 'eye' : 'eye-off'} />
+        <IconButton onPress={onShowPassword} icon={!show ? 'eye' : 'eye-off'} color={myColors.gray} />
       </View>
     </View>
   );

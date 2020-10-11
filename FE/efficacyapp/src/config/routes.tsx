@@ -3,6 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useSelector} from 'react-redux';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
   HomeScreen,
@@ -15,32 +16,56 @@ import {
 } from 'screens';
 import {AppState} from 'storage/reducers';
 import {CustomTheme} from './combineTheme';
+import {myColors} from 'constants/colors';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function DashBoard() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      tabBarOptions={{
+        inactiveBackgroundColor: myColors.red,
+        activeBackgroundColor: myColors.backgroundWhite,
+        activeTintColor: myColors.red,
+        inactiveTintColor: myColors.white,
+        showLabel: false,
+      }}>
       <Tab.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{title: 'Home'}}
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <Icon name="home" color={color} size={size} />
+          ),
+        }}
       />
       <Tab.Screen
         name="OrderScreen"
         component={OrderScreen}
-        options={{title: 'Orders'}}
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <Icon name="bookmark-outline" color={color} size={size} />
+          ),
+        }}
       />
       <Tab.Screen
         name="ShopScreen"
         component={ShopScreen}
-        options={{title: 'Shop'}}
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <Icon name="shopping-bag" color={color} size={size} />
+          ),
+        }}
       />
       <Tab.Screen
         name="ProfileScreen"
         component={ProfileScreen}
-        options={{title: 'Profile'}}
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <Icon name="account-circle" color={color} size={size} />
+          ),
+        }}
       />
     </Tab.Navigator>
   );
@@ -55,7 +80,11 @@ function Routes() {
         screenOptions={() => ({...TransitionPresets.SlideFromRightIOS})}>
         {userState.isLogin ? (
           <>
-            <Stack.Screen name="Dashboard" component={DashBoard} />
+            <Stack.Screen
+              name="Dashboard"
+              component={DashBoard}
+              options={{headerShown: false}}
+            />
           </>
         ) : (
           <>
