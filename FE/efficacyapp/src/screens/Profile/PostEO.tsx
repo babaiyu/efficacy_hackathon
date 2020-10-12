@@ -3,12 +3,13 @@ import {fonts} from 'constants/fonts';
 import React from 'react';
 import {StyleSheet, View, TextInput, Alert} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
-import {Button, Card, Divider} from 'react-native-paper';
+import {Button, Card, Divider, Title} from 'react-native-paper';
 import DatePicker from '@react-native-community/datetimepicker';
 import dayjs from 'dayjs';
 
 type Props = {
   sendData: (data: any) => void;
+  onLive: () => void;
 };
 
 function PostEO(props: Props) {
@@ -36,6 +37,15 @@ function PostEO(props: Props) {
 
   return (
     <View style={styles.content}>
+      <Button
+        color={myColors.white}
+        mode="contained"
+        onPress={props.onLive}
+        style={{marginBottom: 10}}>
+        <Title style={{fontFamily: fonts.bold, color: myColors.red}}>
+          Live
+        </Title>
+      </Button>
       <Card style={{backgroundColor: myColors.white}}>
         <Card.Content>
           <Controller

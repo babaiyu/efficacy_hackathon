@@ -11,9 +11,9 @@ import {
 import {Text, Title} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-function ContentCarousel() {
+function ContentCarousel({onPress, data}: {onPress: () => void, data: any}) {
   return (
-    <Touch>
+    <Touch onPress={onPress}>
       <ImageBackground
         style={[styles.content, styles.column]}
         source={{
@@ -35,7 +35,7 @@ function ContentCarousel() {
           </View>
         </View>
         <View>
-          <Text style={styles.textLive}>Event Keren yang pernah ada</Text>
+          <Text style={styles.textLive}>{data?.title}</Text>
           <View style={[styles.row, {justifyContent: 'flex-start'}]}>
             <Icon
               name="circle"
@@ -50,13 +50,17 @@ function ContentCarousel() {
   );
 }
 
-function CarouselHome() {
+type Props = {
+  onPress: (id: any) => void;
+  data: Array<any>;
+};
+
+function CarouselHome(props: Props) {
   // State
-  const [data, setData] = React.useState([1, 2, 3, 4, 5]);
   return (
     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-      {data.map((i) => (
-        <ContentCarousel key={i} />
+      {props.data.map((i) => (
+        <ContentCarousel data={i} onPress={() => props.onPress(i?.id)} key={i?.id} />
       ))}
     </ScrollView>
   );

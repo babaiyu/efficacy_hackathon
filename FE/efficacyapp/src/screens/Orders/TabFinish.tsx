@@ -17,7 +17,7 @@ function TabFinish(props: Props) {
       </View>
       <View style={{alignItems: 'center'}}>
         <Button mode="contained" onPress={() => {}} color={myColors.red}>
-          Buy
+          Detail
         </Button>
         <View
           style={{

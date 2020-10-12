@@ -9,10 +9,14 @@ import LastActivityProfile from './LastActivityProfile';
 import PostEO from './PostEO';
 import {ScrollView} from 'react-native-gesture-handler';
 import {apiPostConcert} from 'api';
+import {Button} from 'react-native-paper';
+import {myColors} from 'constants/colors';
+import {useNavigation} from '@react-navigation/native';
 
 function Profile() {
   // Props
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const userRedux = useSelector((state: AppState) => state.user);
 
   // Function
@@ -35,6 +39,10 @@ function Profile() {
       });
   };
 
+  const onNavigateLive = () => {
+    navigation.navigate('LiveStreamScreen');
+  };
+
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -52,7 +60,7 @@ function Profile() {
           <LastActivityProfile />
         ) : (
           <>
-            <PostEO sendData={(data) => onPost(data)} />
+            <PostEO onLive={onNavigateLive} sendData={(data) => onPost(data)} />
           </>
         )}
       </View>

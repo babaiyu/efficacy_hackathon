@@ -1,4 +1,4 @@
-const URL = 'http://192.168.1.9:3000/api';
+const URL = 'https://hackathon-efficacy-api.herokuapp.com/api';
 
 async function handleResponse(response: Response) {
   const text = await response.text();
@@ -13,6 +13,7 @@ export async function apiLogin(payload: any) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
     body: JSON.stringify(payload),
   });
@@ -26,6 +27,7 @@ export async function apiRegister(payload: any) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
     body: JSON.stringify(payload),
   });
@@ -35,13 +37,22 @@ export async function apiRegister(payload: any) {
 // CONCERT - GET ALL
 export async function apiGetAllConcert(token: string) {
   const uri = `${URL}/concerts/`;
+  // const res = await axios
+  //   .get(uri, {
+  //     headers: {authorization: `Bearer: ${token}`},
+  //   })
+  //   .then((res) => res.data)
+  //   .catch((err) => err);
+  // return res;
   const res = await fetch(uri, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      Accept: 'application/json',
       authorization: `Bearer: ${token}`,
     },
   });
+  console.log('URI', uri);
   return handleResponse(res);
 }
 
@@ -52,6 +63,7 @@ export async function apiGetConcertID(id: string, token: string) {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      Accept: 'application/json',
       authorization: `Bearer: ${token}`,
     },
   });
@@ -65,6 +77,7 @@ export async function apiPostConcert(payload: any, token: string) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Accept: 'application/json',
       authorization: `Bearer: ${token}`,
     },
     body: JSON.stringify(payload),
@@ -79,9 +92,38 @@ export async function apiOrderConcert(payload: any, token: string) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Accept: 'application/json',
       authorization: `Bearer: ${token}`,
     },
     body: JSON.stringify(payload),
+  });
+  return handleResponse(res);
+}
+
+// START - Live Stream
+export async function apiStartLive(token: string, id: string) {
+  const uri = `${URL}/streams/start/${id}`;
+  const res = await fetch(uri, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      authorization: `Bearer: ${token}`,
+    },
+  });
+  return handleResponse(res);
+}
+
+// Start watch stream
+export async function apiStartVideo(token: string, id: string) {
+  const uri = `${URL}/streams/data/${id}`;
+  const res = await fetch(uri, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      authorization: `Bearer: ${token}`,
+    },
   });
   return handleResponse(res);
 }
