@@ -35,10 +35,10 @@ router.get('/', async (req, res, next) => {
 router.get('/live', async (req, res, next) => {
 	try {
 		const currentlyLive = await Concert.query()
-			.where({
-				stream_key: !null,
+			.whereNot({
+				stream_key: null,
 			})
-			.select('title', 'playback_id');
+			.select('id', 'title', 'playback_id');
 		res.json({
 			currentlyLive,
 			success: true,

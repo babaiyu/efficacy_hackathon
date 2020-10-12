@@ -97,8 +97,8 @@ router.put('/watched/:id', async (req, res, next) => {
 router.put('/stop/:id', async (req, res, next) => {
 	try {
 		await Concert.query().findById(req.params.id).patch({
-			stream_key: null,
-			playback_id: null,
+			stream_key: '',
+			playback_id: '',
 		});
 		res.json({
 			success: true,
