@@ -38,6 +38,9 @@ router.get('/live', async (req, res, next) => {
 			.whereNot({
 				stream_key: null,
 			})
+			.orWhereNot({
+				stream_key: '',
+			})
 			.select('id', 'title', 'playback_id');
 		res.json({
 			currentlyLive,
