@@ -32,6 +32,22 @@ router.get('/', async (req, res, next) => {
 	}
 });
 
+router.get('/live', async (req, res, next) => {
+	try {
+		const currentlyLive = await Concert.query()
+			.where({
+				stream_key: !null,
+			})
+			.select('title', 'playback_id');
+		res.json({
+			currentlyLive,
+			success: true,
+		});
+	} catch (error) {
+		next(error);
+	}
+});
+
 router.get('/registered', async (req, res, next) => {
 	try {
 		const registeredConcert = await Registered.query()
