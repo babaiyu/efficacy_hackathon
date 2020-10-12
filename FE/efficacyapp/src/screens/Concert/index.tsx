@@ -32,6 +32,7 @@ function Concert() {
   const route = useRoute();
 
   // State
+  const [loadFirst, setLoadFirst] = React.useState(true);
   const [loading, setLoading] = React.useState(false);
   const [loadingOrder, setLoadingOrder] = React.useState(false);
   const [data, setData] = React.useState(dummy);
@@ -55,6 +56,7 @@ function Concert() {
         Alert.alert('Alert', 'Internal Server Error');
         setLoading(false);
       });
+    setLoadFirst(false);
   };
 
   const onOrder = () => {
@@ -76,6 +78,7 @@ function Concert() {
         }
       })
       .catch((err) => {
+        console.log("ERROR", err);
         Alert.alert('Alert', 'Internal Server Error');
         setLoadingOrder(false);
       });
@@ -83,7 +86,7 @@ function Concert() {
 
   // Life Cycle
   React.useEffect(() => {
-    if (data.id === null) {
+    if (loadFirst) {
       onGetConcert();
     }
   });
