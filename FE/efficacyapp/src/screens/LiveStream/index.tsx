@@ -15,7 +15,7 @@ import {FlatList, TextInput} from 'react-native-gesture-handler';
 import {Controller, useForm} from 'react-hook-form';
 import {AppState} from 'storage/reducers';
 import {connect} from 'react-redux';
-import {NodeCameraView} from 'react-native-nodemediaclient';
+import {NodeCameraView, NodePlayerView} from 'react-native-nodemediaclient';
 import {apiStartLive, apiStartVideo} from 'api';
 
 const settings = {
@@ -156,6 +156,7 @@ type State = {
 
 class LiveStream extends React.Component<Props, State> {
   vb: any;
+  player: any;
   constructor(props: any) {
     super(props);
     this.state = {
@@ -270,20 +271,34 @@ class LiveStream extends React.Component<Props, State> {
       uri: `https://stream.mux.com/${playbackID}.m3u8`,
     };
     console.log('LIVE', `rtmp://live.mux.com/app/${streamKey}`);
-    console.log("VIDEO", source);
+    console.log('VIDEO', source);
     // const source=require('assets/video/konser.m4v')
     return (
       <View style={styles.container}>
         {this.props.userRedux?.dataUser?.data?.role_id === 1 ? (
-          <Video
-            source={{uri: `https://stream.mux.com/${streamKey}.m3u8`}}
-            onError={(err) => console.log('ERROR Video', err)}
-            onBuffer={(buff) => console.log('BUFFER', buff)}
+          <NodePlayerView
             style={styles.backgroundVideo}
-            resizeMode="cover"
-            paused={paused}
+            ref={(vp: any) => {
+              this.player = vp;
+            }}
+            inputUrl={source.uri}
+            scaleMode={'ScaleAspectFit'}
+            bufferTime={300}
+            maxBufferTime={1000}
+            autoplay={true}
           />
         ) : (
+          // <Video
+          //   source={{uri: `https://stream.mux.com/${streamKey}.m3u8`}}
+          //   onError={(err) => console.log('ERROR Video', err)}
+          //   onBuffer={(buff) => console.log('BUFFER', buff)}
+          //   ref={(ref) => {
+          //     this.player = ref
+          //   }}
+          //   style={styles.backgroundVideo}
+          //   resizeMode="cover"
+          //   paused={paused}
+          // />
           <NodeCameraView
             style={styles.backgroundVideo}
             ref={(vb: any) => {
